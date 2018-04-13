@@ -30,13 +30,27 @@ app.get("/list", function(req, res) {
 	const parlamentYear = month < 7 ? (year - 1) + "/" + year.toString().substr(2) : year + "/" + (year + 1).toString().substr(2)
 
 	request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=500&utformat=json&gruppering=votering_id", function (data) {
-		res.send({"votes": data.voteringlista.votering, "year": parlamentYear});
+		res.send({"voteringar": data.voteringlista.votering, "ar": parlamentYear});
 	})
 });
 
 app.get("/vote", function (req, res) {
 	request("http://data.riksdagen.se/votering/" + req.query.vote + "/json", function (data) {
-		res.send(data.votering)
+		var responseData = {"dokument": data.votering.dokument, "voteringar": data.votering.dokvotering.votering, "bilaga": data.votering.dokbilaga.bilaga}
+
+		var partyVotes = {"j": {}, "n": {}, "a": {}, "f": {}}
+	//Frånvarande
+		for (d in data.votering.dokvotering.votering) {
+			const voteData = data.votering.dokvotering.votering[d]
+			
+			const vote = voteData["rost"].toLowerCase().substr(0, 1)
+			partyVotes[vote][voteData["parti"]] == undefined ? partyVotes[vote][voteData["parti"]] = 1 : partyVotes[vote][voteData["parti"]] += 1
+			partyVotes["total_" + vote] == undefined ? partyVotes["total_" + vote] = 1 : partyVotes["total_" + vote] += 1
+		}
+
+		responseData.parti_roster = partyVotes
+
+		res.send(responseData)
 	})
 })
   
