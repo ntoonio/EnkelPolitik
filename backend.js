@@ -14,7 +14,9 @@ function request(url, response) {
 	});
 	
 	resp.on("end", () => {
+        console.log(data)
 		response(JSON.parse(data))
+        console.log("---")
 	});
 	
 	}).on("error", (err) => {
@@ -28,18 +30,34 @@ app.get("/list", function(req, res) {
 	const year = date.getFullYear()
 	const month = date.getMonth()
 	const parlamentYear = month < 7 ? (year - 1) + "/" + year.toString().substr(2) : year + "/" + (year + 1).toString().substr(2)
+    
+    var voteringar = []
 
 	request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=500&utformat=json&gruppering=votering_id", function (data) {
-		res.send({"voteringar": data.voteringlista.votering, "ar": parlamentYear});
+		//res.send({"voteringar": data.voteringlista.votering, "ar": parlamentYear});
+        for (v in data.voteringlista.votering){
+            const voteringId = data.voteringlista.votering[v].votering_id
+            console.log(voteringId + " getVote = " + getVote(voteringId))
+            voteringar.push(JSON.parse(getVote(voteringId)))
+            console.log("--",voteringar)
+        }
+        voteringar.sort(function (a,b){
+            if(a.datum < b.datum) return -1;
+            if(a.datum > b.datum) return 1;
+            return 0
+        })
+        res.send(JSON.stringify(voteringar))
 	})
 });
 
-app.get("/vote", function (req, res) {
-	request("http://data.riksdagen.se/votering/" + req.query.vote + "/json", function (data) {
+function getVote(id){
+    request("http://data.riksdagen.se/votering/" + id + "/json", function (data) {
 		var responseData = {"dokument": data.votering.dokument, "voteringar": data.votering.dokvotering.votering, "bilaga": data.votering.dokbilaga.bilaga}
+        
+        console.log(data)
 
 		var partyVotes = {"j": {}, "n": {}, "a": {}, "f": {}}
-	//Frånvarande
+	
 		for (d in data.votering.dokvotering.votering) {
 			const voteData = data.votering.dokvotering.votering[d]
 			
@@ -49,9 +67,13 @@ app.get("/vote", function (req, res) {
 		}
 
 		responseData.parti_roster = partyVotes
-
-		res.send(responseData)
+        
+		return responseData
 	})
+}
+
+app.get("/vote", function (req, res) {
+	resp.send(getVote(req.query.vote))
 })
   
 app.listen(3000, function() {
