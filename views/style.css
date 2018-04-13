@@ -63,3 +63,25 @@ img {
   border: 0px;
   border-bottom: 1px;
 }
+
+.yesvote {
+  overflow: hidden;
+  background-color: #cccccc;
+  float:left;
+}
+
+.novote {
+  overflow: hidden;
+  background-color: #808080;
+  float:left;
+}
+
+.neutralvote {
+  overflow: hidden;
+  background-color: #a6a6a6;
+  float:left;
+}
+
+.partycell {
+  float:left;
+}

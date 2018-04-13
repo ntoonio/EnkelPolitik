@@ -1,20 +1,41 @@
-
-$.getJSON( "list", function( data ) {
-  var insert = "";
+var insert = "";
+$.getJSON( "list", function( datalist ) {
   for(var i=0;i<10;i++) {
-    $.getJSON("vote?vote="+data.voteringar[i].votering_id, function(data) {
-
-      insert = insert + "<div class=\"subunit\"><div class=\"yesvote\">Yes<br />"
+    $.getJSON("vote?vote="+datalist.voteringar[i].votering_id, function(data) {
+      var totalvotes=0;
+      var title="Unknown law";
+      if (datalist.hasOwnProperty('title')) {
+        totalvotes=datalist.title;
+      }
+      insert = insert.concat("<div class=\"subunit\">" + title + " <div class=\"yesvote\">Yes<br />");
       $.each(data.parti_roster.j, function(key,value) {
-        insert=insert+""
+        totalvotes+=value;
+        insert=insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor(key) + ";width:" + value/10 + "vw;height:1vw\">" + key + "</div>");
       });
-
+      insert = insert.concat("</div>");
+      insert = insert.concat("<div class=\"novote\">No<br />");
+      $.each(data.parti_roster.n, function(key,value) {
+        totalvotes+=value;
+        insert=insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor(key) + ";width:" + value/10 + "vw;height:1vw\">" + key + "</div>");
+      });
+      insert = insert.concat("</div></div>");
+      if (data.parti_roster.hasOwnProperty('total_f')) {
+        totalvotes+=data.parti_roster.total_f;
+      }
+      if (data.parti_roster.hasOwnProperty('total_a')) {
+        totalvotes+=data.parti_roster.total_a;
+      }
+      insert = insert.concat("<div class=\"neutralvote\">Novote " + totalvotes + "<br />");
+      insert=insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor("-") + ";width:" + (data.parti_roster.total_f+data.parti_roster.total_a)/10 + "vw;height:1vw\">" + "-" + "</div>");
+      insert = insert.concat("</div><br/><br>");
+      console.log(insert);
+      document.getElementById("votes").innerHTML = insert;
     });
   }
 });
 
 function getColor(party) {
-  if(party="SD") {
+  if(party=="SD") {
     return "#fffc00";
   } else if(party=="V") {
     return "#990000";
