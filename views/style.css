@@ -1,0 +1,58 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.title {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+div {
+  padding: 0px;
+  margin: 0px;
+}
+
+h1 {
+  font-size: 6vw;
+  margin:0px;
+  padding:0px;
+}
+
+h2 {
+  font-size: 4vw;
+  margin:0px;
+  padding:0px;
+}
+
+.inlinespan {
+  background-color: yellow;
+}
+
+h3 {
+  font-size: 2vw;
+  margin:0px;
+  padding:0px;
+}
+
+img {
+  vertical-align:middle;
+  padding: 0px;
+  margin: 0px;
+}
+
+.logo {
+  width:10vw;
+  height:10vw;
+}
+
+#inforiksdag {
+    background-image: url("photos/riksdag.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 1;
+    height:500px;
+}
