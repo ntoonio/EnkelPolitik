@@ -2,6 +2,7 @@ var question;
 var quizJSON;
 var support;
 
+
 startQuiz();
 
 //Grab quiz
@@ -13,7 +14,9 @@ function startQuiz() {
 }
 
 function selectOption(value) {
-
+  support.push(value);
+  question++;
+  generateQuestion(quizJSON.quiz[question]);
 }
 
 function generateQuestion(genJSON) {
