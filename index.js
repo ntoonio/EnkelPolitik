@@ -6,8 +6,8 @@ var fs = require("fs")
 
 var app = express()
 
-app.use("/views", express.static(path.join(__dirname, 'views')))
-app.use("/views/photos", express.static(path.join(__dirname, 'views')))
+app.use("/views", express.static(path.join(__dirname, "views")))
+app.use("/views/photos", express.static(path.join(__dirname, "views")))
 
 function request(url, response) {
 	http.get(url, (res) => {
@@ -27,15 +27,15 @@ function request(url, response) {
 }
 
 app.get("/", function(req, res) {
-	res.sendFile('views/index.html', {root: __dirname })
+	res.sendFile("views/index.html", {root: __dirname })
 })
 
 app.get("/info", function(req, res) {
-	res.sendFile('views/info.html', {root: __dirname })
+	res.sendFile("views/info.html", {root: __dirname })
 })
 
 app.get("/quiz", function(req, res) {
-	res.sendFile('views/quiz.html', {root: __dirname })
+	res.sendFile("views/quiz.html", {root: __dirname })
 })
 
 app.get("/list", function(req, res) {
@@ -109,6 +109,10 @@ function getVote(id, response) {
 		})
 	})
 }
+
+app.get("/getQuiz", function (req, res) {
+	res.sendFile("quiz.json", {root: __dirname })
+})
 
 app.get("/vote", function (req, res) {
 	res.send(getVote(req.query.vote))
