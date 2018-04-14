@@ -5,8 +5,8 @@ $.getJSON( "/list", function( datalist ) {
       var totalvotes=0;
       var title="Unknown law";
       var activevotes;
-      if (datalist.voteringar[i].hasOwnProperty('title')) {
-        totalvotes=datalist.title;
+      if (data.dokument.hasOwnProperty('title')) {
+        title=data.dokument.title;
       }
       insert = insert.concat("<div class=\"subunit\"><h4>" + title + " </h4><div class=\"yesvote\">Yes<br />");
       $.each(data.parti_roster.j, function(key,value) {
@@ -32,7 +32,6 @@ $.getJSON( "/list", function( datalist ) {
       insert = insert.concat("<div class=\"neutralvote\" style=\"width:"+ activevotes + "vw;\">Novote<br />");
       insert=insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor("-") + ";width:" + (data.parti_roster.total_f+data.parti_roster.total_a)/10 + "vw;height:1vw\">" + "-" + "</div>");
       insert = insert.concat("</div><br/><br><br></div>");
-      console.log(insert);
       document.getElementById("votes").innerHTML = insert;
     });
   }
