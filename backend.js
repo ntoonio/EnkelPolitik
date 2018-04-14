@@ -40,7 +40,7 @@ app.get("/list", function(req, res) {
 	const year = date.getFullYear()
 	const month = date.getMonth()
 	const parlamentYear = month < 7 ? (year - 1) + "/" + year.toString().substr(2) : year + "/" + (year + 1).toString().substr(2)
-
+	/*
 	const cacheFileName = "cache_" + parlamentYear.replace("/", "") + ".json"
 
 	var usingCache = false
@@ -80,7 +80,7 @@ app.get("/list", function(req, res) {
 					}
 				})
 			}
-
+	*/
 	request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=10&utformat=json&gruppering=votering_id", function(data) {
 		//res.send({"voteringar": data.voteringlista.votering, "ar": parlamentYear});
 		var sendData = {}
@@ -96,7 +96,7 @@ app.get("/list", function(req, res) {
 		res.send(sendData);
 	})
 });
-
+/*
 function getVote(id, response) {
     request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
 		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
@@ -114,7 +114,7 @@ function getVote(id, response) {
 
 			responseData.parti_roster = partyVotes
 
-			response(responseData)
+			response(responseData)*/
 app.get("/vote", function (req, res) {
 	request("http://data.riksdagen.se/votering/" + req.query.vote + "/json", function(data) {
 		var responseData = {"title": data.votering.dokument.titel, "dokument": data.votering.dokument, "voteringar": data.votering.dokvotering.votering, "bilaga": data.votering.dokbilaga.bilaga}
