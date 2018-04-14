@@ -40,7 +40,6 @@ app.get("/list", function(req, res) {
 	const year = date.getFullYear()
 	const month = date.getMonth()
 	const parlamentYear = month < 7 ? (year - 1) + "/" + year.toString().substr(2) : year + "/" + (year + 1).toString().substr(2)
-<<<<<<< HEAD
 
 	const cacheFileName = "cache_" + parlamentYear.replace("/", "") + ".json"
 
@@ -81,26 +80,23 @@ app.get("/list", function(req, res) {
 					}
 				})
 			}
-=======
-	
+
 	request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=10&utformat=json&gruppering=votering_id", function(data) {
 		//res.send({"voteringar": data.voteringlista.votering, "ar": parlamentYear});
 		var sendData = {}
-		
+
 		var count = 0;
 		data.voteringlista.votering.forEach(function(value) {
 			//console.log("Id: " + value.votering_id + " / " + id);
 			sendData[count++] = value.votering_id;
 			//console.log(JSON.stringify(value))
->>>>>>> origin/master
 		})
-		
+
 		//console.log(JSON.stringify(sendData));
 		res.send(sendData);
 	})
 });
 
-<<<<<<< HEAD
 function getVote(id, response) {
     request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
 		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
@@ -119,18 +115,17 @@ function getVote(id, response) {
 			responseData.parti_roster = partyVotes
 
 			response(responseData)
-=======
 app.get("/vote", function (req, res) {
 	request("http://data.riksdagen.se/votering/" + req.query.vote + "/json", function(data) {
 		var responseData = {"title": data.votering.dokument.titel, "dokument": data.votering.dokument, "voteringar": data.votering.dokvotering.votering, "bilaga": data.votering.dokbilaga.bilaga}
-		
+
 		console.log("Test: " + req.query.vote + ", " + data.votering.dokbilaga.bilaga.title);// + "," + JSON.stringify(data));
-		
+
 		var partyVotes = {"j": {}, "n": {}, "a": {}, "f": {}}
 		data.votering.dokvotering.votering.forEach(function(value) {
 			var vote = value.rost.toLowerCase().substr(0, 1)
 			//console.log(JSON.stringify(value))
-			
+
 			if(typeof partyVotes[vote][value.parti] == 'undefined') {
 				partyVotes[vote][value.parti] = 1;
 				partyVotes["total_" + vote] = 1;
@@ -138,7 +133,6 @@ app.get("/vote", function (req, res) {
 				partyVotes[vote][value.parti] += 1;
 				partyVotes["total_" + vote] += 1;
 			}
->>>>>>> origin/master
 		})
 		responseData.parti_roster = partyVotes
 		res.send(responseData)
@@ -146,7 +140,6 @@ app.get("/vote", function (req, res) {
 })
 
 app.listen(3000, function() {
-<<<<<<< HEAD
 	console.log("Running!")
 })
 /*function Calc() {
