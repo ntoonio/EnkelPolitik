@@ -13,7 +13,7 @@ function calc(opinion, importance, parties, members, memberVotes) {
 				sumOfYes++
 			}
 			else if (memberVotes[k][l] == 0) {
-				SumOfNo++
+				sumOfNo++
 			}
 		}
 	}
