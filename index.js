@@ -10,16 +10,15 @@ app.use("/views", express.static(path.join(__dirname, 'views')))
 app.use("/views/photos", express.static(path.join(__dirname, 'views')))
 
 function request(url, response) {
-	http.get(url, (resp) => {
+	http.get(url, (res) => {
 	let data = ""
 
-	resp.on("data", (chunk) => {
+	res.on("data", (chunk) => {
 		data += chunk
 	})
 
-	resp.on("end", () => {
-		const jj = JSON.parse(data)
-		response(jj)
+	res.on("end", () => {
+		response(JSON.parse(data))
 	})
 
 	}).on("error", (err) => {
@@ -112,7 +111,7 @@ function getVote(id, response) {
 }
 
 app.get("/vote", function (req, res) {
-	resp.send(getVote(req.query.vote))
+	res.send(getVote(req.query.vote))
 })
 
 app.listen(3000, function() {
