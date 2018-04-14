@@ -29,8 +29,8 @@ function calc(parties, members, memberVotes) {
 	return parties
 }
 
-var parties = 		[0,0,0,0,0,0,0,0,0]
-var memebers = 		[0,0,0,0,0,0,0,0,0,0,0,0]
-var memberVotes = 	[0,0,0,0,0,0,0,0,0,0,0,0,0]
+var parties = 		[]
+var memebers = 		[]
+var memberVotes = 	[]
 
 console.log(calc(parties, members, memberVotes))
