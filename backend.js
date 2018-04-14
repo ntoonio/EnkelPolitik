@@ -2,7 +2,6 @@ var http = require("http");
 var https = require("https");
 var express = require("express");
 var app = express();
-//var fs = require("fs");
 //var index = fs.readFileSync("index.html");
 
 function request(url, response) {
@@ -14,9 +13,8 @@ function request(url, response) {
 	});
 	
 	resp.on("end", () => {
-        console.log(data)
-		response(JSON.parse(data))
-        console.log("---")
+		const jj = JSON.parse(data)
+		response(jj)
 	});
 	
 	}).on("error", (err) => {
@@ -34,23 +32,26 @@ app.get("/list", function(req, res) {
     var voteringar = []
 
 	request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=500&utformat=json&gruppering=votering_id", function (data) {
-		//res.send({"voteringar": data.voteringlista.votering, "ar": parlamentYear});
         for (v in data.voteringlista.votering){
             const voteringId = data.voteringlista.votering[v].votering_id
-            console.log(voteringId + " getVote = " + getVote(voteringId))
-            voteringar.push(JSON.parse(getVote(voteringId)))
-            console.log("--",voteringar)
-        }
-        voteringar.sort(function (a,b){
-            if(a.datum < b.datum) return -1;
-            if(a.datum > b.datum) return 1;
+			
+			getVote(voteringId, function (vote) {
+				voteringar.push(vote) // SÄTT IN DEN HÄR DÄR OCH NÄR DET PASSAR
+				// Problemet är att den är async
+			})
+		}
+		
+        voteringar.sort(function (a, b) {
+            if (a.datum < b.datum) return -1;
+            if (a.datum > b.datum) return 1;
             return 0
-        })
-        res.send(JSON.stringify(voteringar))
+		})
+		
+        res.send(JSON.stringify({"voteringar": voteringar, "ar": parlamentYear}))
 	})
 });
 
-function getVote(id){
+function getVote(id, response){
     request("http://data.riksdagen.se/votering/" + id + "/json", function (data) {
 		var responseData = {"dokument": data.votering.dokument, "voteringar": data.votering.dokvotering.votering, "bilaga": data.votering.dokbilaga.bilaga}
         
@@ -68,7 +69,7 @@ function getVote(id){
 
 		responseData.parti_roster = partyVotes
         
-		return responseData
+		response(responseData)
 	})
 }
 
