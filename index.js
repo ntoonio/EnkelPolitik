@@ -115,7 +115,9 @@ app.get("/getQuiz", function (req, res) {
 })
 
 app.get("/vote", function (req, res) {
-	res.send(getVote(req.query.vote))
+	getVote(req.query.vote, function (data) {
+		res.send(data)
+	})
 })
 
 app.listen(3000, function() {
