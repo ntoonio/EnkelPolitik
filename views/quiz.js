@@ -15,8 +15,15 @@ function startQuiz() {
 
 function selectOption(value) {
   support.push(value);
-  question++;
-  generateQuestion(quizJSON.quiz[question]);
+  if(!(quizJSON.quiz.length-1==question)) {
+    question++;
+    generateQuestion(quizJSON.quiz[question]);
+  } else {
+    var arrStr = encodeURIComponent(JSON.stringify(support));
+    $.getJSON("/submitQuiz?support="+arrStr, function(data) {
+      document.getElementById('quizcontainer').innerHTML = "<h3>The recomended party for you is " + data.firstParty + "!</h3>";
+    });
+  }
 }
 
 function generateQuestion(genJSON) {
@@ -26,5 +33,5 @@ function generateQuestion(genJSON) {
   "<button style=\"background-color:#00d128;\" onClick=\"selectOption(1)\">Yes</button>"+
   "<button style=\"background-color:#adadad;\" onClick=\"selectOption(0)\">I dont care</button>"+
   "<button style=\"background-color:#ff0000;\" onClick=\"selectOption(-1)\">No</button>"+
-  "<button style=\"background-color:#9c0000;\" onClick=\"selectOption(-2)\">No, Very</button>"+;
+  "<button style=\"background-color:#9c0000;\" onClick=\"selectOption(-2)\">No, Very</button>";
 }
