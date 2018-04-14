@@ -4,11 +4,15 @@ $.getJSON( "/list", function( datalist ) {
     $.getJSON("/vote?vote="+datalist.voteringar[i].votering_id, function(data) {
       var totalvotes=0;
       var title="Unknown law";
+      var expanded="";
       var activevotes;
-      if (data.dokument.hasOwnProperty('title')) {
-        title=data.dokument.title;
+      if (data.dokument.hasOwnProperty('titel')) {
+        title=data.dokument.titel;
       }
-      insert = insert.concat("<div class=\"subunit\"><h4>" + title + " </h4><div class=\"yesvote\">Yes<br />");
+      if (data.dokument.hasOwnProperty('typrubrik')) {
+        expanded=data.dokument.typrubrik;
+      }
+      insert = insert.concat("<div class=\"subunit\"><a href=\"" + data.dokument.dokument_url_html +"\"><h4>" + title + " </h4></a>" + expanded + "<div class=\"yesvote\">Yes<br />");
       $.each(data.parti_roster.j, function(key,value) {
         totalvotes+=value;
         activevotes+=value/10;

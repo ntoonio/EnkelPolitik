@@ -32,6 +32,10 @@ app.get("/info", function(req, res) {
 	res.sendFile('views/info.html', {root: __dirname })
 });
 
+app.get("/quiz", function(req, res) {
+	res.sendFile('views/quiz.html', {root: __dirname })
+});
+
 app.get("/list", function(req, res) {
 	const date = new Date()
 
