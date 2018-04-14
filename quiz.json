@@ -18,7 +18,7 @@
 			}
 		},
 			{
-			"law": "equality and the establishment of refugees ",
+			"law": "Equality and the establishment of refugees ",
 			"description": "In the report, the Committee on Employment and Social Affairs deals with the Government's proposal in the 2016 budget bill in the field of equality and new immigrants' expatriation and alternative proposals for appropriations in the area of ​​expenditure from m,SD, C, L and KD. The budget bill for 2016 is based on an agreement between the government parties and V. Furthermore, it is proposed to abolish the system of launchers.",
 			"vote": {
 				"yes": {
@@ -27,7 +27,7 @@
 					"MP": "24",
 					"C": "9",
 					"V": "19",
-					"L": "2",
+					"L": "2"
 
 				},
 				"no": {
@@ -45,13 +45,13 @@
 					"MP": "24",
 					"C": "9",
 					"V": "19",
-					"L": "2",
+					"L": "2"
 
 				},
 				"no": {
 					"SD": "39"
 				}
 			}
-		},
+		}
 	]
 }
