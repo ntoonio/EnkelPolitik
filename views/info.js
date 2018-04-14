@@ -5,7 +5,7 @@ $.getJSON( "192.168.56.255:3000/list", function( datalist ) {
       var totalvotes=0;
       var title="Unknown law";
       var activevotes;
-      if (datalist.hasOwnProperty('title')) {
+      if (datalist.votering[i].hasOwnProperty('title')) {
         totalvotes=datalist.title;
       }
       insert = insert.concat("<div class=\"subunit\"><h4>" + title + " </h4><div class=\"yesvote\">Yes<br />");
