@@ -23,7 +23,7 @@ function selectOption(value) {
   support.push(value);
   if(!(quizJSON.quiz.length-1==question)) {
     console.log('1');
-    question++;
+
     generateQuestion(quizJSON.quiz[question]);
   } else {
     console.log('2');
@@ -35,12 +35,13 @@ function selectOption(value) {
 }
 
 function generateQuestion(genJSON) {
-  console.log("Generating" + genJSON);
+  console.log("Generating" + JSON.stringify(genJSON));
   document.getElementById('quizcontainer').innerHTML = "<h2>Do you support: " + genJSON.law + "</h2>"
   + "<h3>" + genJSON.description + "</h3>" +
-  "<button style=\"background-color:#008705;\" onClick=\"selectOption(2)\">Yes, Very</button>"+
-  "<button style=\"background-color:#00d128;\" onClick=\"selectOption(1)\">Yes</button>"+
-  "<button style=\"background-color:#adadad;\" onClick=\"selectOption(0)\">I dont care</button>"+
-  "<button style=\"background-color:#ff0000;\" onClick=\"selectOption(-1)\">No</button>"+
-  "<button style=\"background-color:#9c0000;\" onClick=\"selectOption(-2)\">No, Very</button>";
+  "<button style=\"background-color:#008705;\" onClick=\"selectOption(2)\">Yes, Very</button><br />"+
+  "<button style=\"background-color:#00d128;\" onClick=\"selectOption(1)\">Yes</button><br />"+
+  "<button style=\"background-color:#adadad;\" onClick=\"selectOption(0)\">I dont care</button><br />"+
+  "<button style=\"background-color:#ff0000;\" onClick=\"selectOption(-1)\">No</button><br />"+
+  "<button style=\"background-color:#9c0000;\" onClick=\"selectOption(-2)\">No, Very</button><br />";
+  question++;
 }
