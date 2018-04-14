@@ -6,13 +6,17 @@ $.getJSON( "/list", function( datalist ) {
       var title="Unknown law";
       var expanded="";
       var activevotes;
+      var date="";
       if (data.dokument.hasOwnProperty('titel')) {
         title=data.dokument.titel;
       }
       if (data.dokument.hasOwnProperty('typrubrik')) {
         expanded=data.dokument.typrubrik;
       }
-      insert = insert.concat("<div class=\"subunit\"><a href=\"" + data.dokument.dokument_url_html +"\"><h4>" + title + " </h4></a>" + expanded + "<div class=\"yesvote\">Yes<br />");
+      if (data.dokument.hasOwnProperty('datum')) {
+        date=data.dokument.datum;
+      }
+      insert = insert.concat("<div class=\"subunit\"><a href=\"" + data.dokument.dokument_url_html +"\"><h4>" + title + " </h4></a>" + expanded + "<br />" + date.split(" ")[0] + "<div class=\"yesvote\">Yes<br />");
       $.each(data.parti_roster.j, function(key,value) {
         totalvotes+=value;
         activevotes+=value/10;
