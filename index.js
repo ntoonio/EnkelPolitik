@@ -47,7 +47,20 @@ app.get("/list", function(req, res) {
 	
 	const cacheFileName = "cache_" + parlamentYear.replace("/", "") + ".json"
 
-	function getVotes() {
+	var usingCache = false
+
+	if (fs.existsSync(cacheFileName)) {
+		const content = fs.readFileSync(cacheFileName)
+		const cahceTime = JSON.parse(content).timestamp
+		const nowTime = Date.now()
+
+		if (JSON.parse(content).timestamp > Date.now() - 7200 * 1000) {
+			usingCache = true
+			res.send(content)
+		}
+	}
+
+	if (!usingCache) {
 		var voteringar = []
 
 		request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=10&utformat=json&gruppering=votering_id", function (data) {
@@ -72,19 +85,6 @@ app.get("/list", function(req, res) {
 				})
 			}
 		})
-	}
-
-	if (fs.existsSync(cacheFileName)) {
-		const content = fs.readFileSync(cacheFileName)
-		if (JSON.parse(content).timestamp < Date.now() - 7200) {
-			getVotes()
-		}
-		else {
-			res.send(content)
-		}
-	}
-	else {
-		getVotes()
 	}
 })
 
