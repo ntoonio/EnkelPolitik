@@ -30,6 +30,10 @@ app.get("/", function(req, res) {
 	res.sendFile('views/index.html', {root: __dirname })
 })
 
+app.get("/getQuiz", function(req, res) {
+	res.sendFile('quiz.json', {root: __dirname })
+});
+
 app.get("/info", function(req, res) {
 	res.sendFile('views/info.html', {root: __dirname })
 })
