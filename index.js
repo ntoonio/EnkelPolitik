@@ -113,63 +113,6 @@ function getVote(id, response) {
 app.get("/getQuiz", function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 	res.sendFile("quiz.json", {root: __dirname });
-	/*res.send({
-		"quiz": [
-			{
-				"law": "Housing aid",
-				"description": "More than 6.9 billion sek from the state budget for 2018 goes to the area of ​​social planning, housing supply and construction and consumer policy. the Most money goes to investment support to organize rental housing and housing for students, 3.2 billion kronor. 1.3 billion sek goes to municipalities for increased housing construction and  1 billion sek goes to energy efficiency and renovation of multi-family houses and outdoor environments.",
-				"vote": {
-					"yes": {
-						"S": "102",
-						"M": "5",
-						"MP": "20",
-						"C": "5",
-						"V": "19",
-						"KD": "1"
-					},
-					"no": {
-						"SD": "41"
-					}
-				}
-			},
-				{
-				"law": "equality and the establishment of refugees ",
-				"description": "In the report, the Committee on Employment and Social Affairs deals with the Government's proposal in the 2016 budget bill in the field of equality and new immigrants' expatriation and alternative proposals for appropriations in the area of ​​expenditure from m,SD, C, L and KD. The budget bill for 2016 is based on an agreement between the government parties and V. Furthermore, it is proposed to abolish the system of launchers.",
-				"vote": {
-					"yes": {
-						"S": "104",
-						"M": "19",
-						"MP": "24",
-						"C": "9",
-						"V": "19",
-						"L": "2",
-
-					},
-					"no": {
-						"SD": "39"
-					}
-				}
-			},
-	      {
-				"law": "Workplace regulations and working hours",
-				"description": "",
-				"vote": {
-					"yes": {
-						"S": "104",
-						"M": "19",
-						"MP": "24",
-						"C": "9",
-						"V": "19",
-						"L": "2",
-
-					},
-					"no": {
-						"SD": "39"
-					}
-				}
-			},
-		]
-	});*/
 })
 
 app.get("/vote", function (req, res) {
