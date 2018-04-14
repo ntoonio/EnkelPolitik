@@ -66,7 +66,7 @@ app.get("/list", function(req, res) {
 						})
 
 						const output = JSON.stringify({"voteringar": voteringar, "ar": parlamentYear, "timestamp": Date.now()})
-						fs.writeFile(cacheFileName, output)
+						fs.writeFile(cacheFileName, output, function () {})
 						res.send(output)
 					}
 				})
