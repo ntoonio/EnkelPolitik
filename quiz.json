@@ -1,0 +1,32 @@
+<<<<<<< HEAD
+"quiz":[{
+    "law":"Bostads hjälp",
+    "description":"Drygt 6,9 miljarder kronor ut statens budget för 2018 går till utgiftsområdet Samhällsplanering, bostadsförsörjning och byggande samt konsumentpolitik. Mest pengar går till investeringsstöd för att anordna hyresbostäder och bostäder för studerande, 3,2 miljarder kronor. 1,3 miljarder kronor går till stöd till kommuner för ökat bostadsbyggande och 1 miljard kronor går till energieffektivisering och renovering av flerbostadshus och utomhusmiljöer.",
+"vote": {
+    "för":{"S":"102","M":"5","MP":"20","C":"5","V":"19","KD":"1"},
+    "emot":{"SD":"41"}
+}
+}]
+=======
+{
+	"quiz": [
+		{
+			"law": "Bostads hjälp",
+			"description": "Drygt 6,9 miljarder kronor ut statens budget för 2018 går till utgiftsområdet Samhällsplanering, bostadsförsörjning och byggande samt konsumentpolitik. Mest pengar går till investeringsstöd för att anordna hyresbostäder och bostäder för studerande, 3,2 miljarder kronor. 1,3 miljarder kronor går till stöd till kommuner för ökat bostadsbyggande och 1 miljard kronor går till energieffektivisering och renovering av flerbostadshus och utomhusmiljöer.",
+			"vote": {
+				"yes": {
+					"S": "102",
+					"M": "5",
+					"MP": "20",
+					"C": "5",
+					"V": "19",
+					"KD": "1"
+				},
+				"no": {
+					"SD": "41"
+				}
+			}
+		}
+	]
+}
+>>>>>>> origin/master
