@@ -191,8 +191,8 @@ function MumsKorv( d,  p,  v) {
 
 
 
-}*/
+}
 =======
 	console.log("Running!");
 });
->>>>>>> origin/master
+>>>>>>> origin/master*/
