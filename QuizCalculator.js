@@ -5,7 +5,7 @@ function calc(parties, members, memberVotes) {
 	var sum = 0
 	var sumOfYes = 0
 	var sumOfNo = 0
-
+    var grej;
 	for (var j = 0; j <= members.length - 1; j++) {
 		sum += members[j]
 	}
