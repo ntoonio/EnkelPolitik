@@ -1,7 +1,4 @@
-function calc(parties, members, memberVotes) {
-	var opinion = parseFloat(prompt("what is your opinion on this draft"))
-	var importance = parseFloat(prompt("how impotant do you consider this draft to be"))
-
+function calc(opinion, importance, parties, members, memberVotes) {
 	var sum = 0
 	var sumOfYes = 0
 	var sumOfNo = 0
@@ -33,4 +30,7 @@ var parties = []
 var memebers = []
 var memberVotes = []
 
-console.log(calc(parties, members, memberVotes))
+var opinion = parseFloat(prompt("what is your opinion on this draft"))
+var importance = parseFloat(prompt("how impotant do you consider this draft to be"))
+
+console.log(calc(opinion, importance, parties, members, memberVotes))
