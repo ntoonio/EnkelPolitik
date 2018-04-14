@@ -35,6 +35,12 @@ h3 {
   padding:0px;
 }
 
+h4 {
+  font-size: 1.5vw;
+  margin:0px;
+  padding:0px;
+}
+
 img {
   vertical-align:middle;
   padding: 0px;
@@ -57,31 +63,51 @@ img {
     height:500px;
 }
 
+#inforiksdaginne {
+    background-image: url("photos/riksdaginne.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 1;
+    height:250px;
+}
+
 .subunit {
   background-color: #e3e3e3;
   border-style: solid;
-  border: 0px;
   border-bottom: 1px;
 }
 
 .yesvote {
   overflow: hidden;
   background-color: #cccccc;
-  float:left;
+  float:right;
 }
 
 .novote {
   overflow: hidden;
   background-color: #808080;
-  float:left;
+  float:right;
 }
 
 .neutralvote {
   overflow: hidden;
   background-color: #a6a6a6;
-  float:left;
+  float:right;
 }
 
 .partycell {
-  float:left;
+  float:right;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.politibutton {
+  background-color: #ece300;
+  font-size: 2vw;
 }
