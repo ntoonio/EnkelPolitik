@@ -5,7 +5,7 @@ function calc(parties, members, memberVotes) {
 	var sum = 0
 	var sumOfYes = 0
 	var sumOfNo = 0
-    var grej;
+
 	for (var j = 0; j <= members.length - 1; j++) {
 		sum += members[j]
 	}
@@ -16,7 +16,7 @@ function calc(parties, members, memberVotes) {
 				sumOfYes++
 			}
 			else if (memberVotes[k][l] == 0) {
-				sumOfNo++
+				SumOfNo++
 			}
 		}
 	}
@@ -29,8 +29,8 @@ function calc(parties, members, memberVotes) {
 	return parties
 }
 
-var parties = 		[]
-var memebers = 		[]
-var memberVotes = 	[]
+var parties = []
+var memebers = []
+var memberVotes = []
 
 console.log(calc(parties, members, memberVotes))
