@@ -121,7 +121,7 @@ app.get("/vote", function (req, res) {
 app.listen(3000, function() {
 	console.log("Running!")
 })
-function Calc() {
+/*function Calc() {
 var l= Votes(10,4,1,1);
 	var OP=prompt("what is your opinion on this draft");
 	var IMP_STRING=prompt("how impotant do you consider this draft to be");
@@ -130,9 +130,9 @@ var l= Votes(10,4,1,1);
 	var IMP=parseFloat(IMP_STRING);
 	var PO=1;
 
-var Parties[0,0,0,0,0,0,0,0,0];
-var Ledamöter[0,0,0,0,0,0,0,0,0,0,0,0];
-var Ledamöter_Röster[0,0,0,0,0,0,0,0,0,0,0,0,0,][0,0,0,0,0,0,0,0,0,0,0,0,0,];
+var Parties[];
+var Ledamöter[];
+var Ledamöter_Röster[][];
 var sum = 0;
 var SumOfYes=0;
 var SumOfNo=0;
@@ -171,3 +171,7 @@ function MumsKorv( d,  p,  v) {
 
 
 }
+function HandleData(var data) {
+
+
+}*/
