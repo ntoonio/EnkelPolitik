@@ -1,6 +1,6 @@
 var question;
 var quizJSON;
-var support;
+var support=[];
 
 
 startQuiz();
@@ -8,17 +8,25 @@ startQuiz();
 //Grab quiz
 function startQuiz() {
   $.getJSON("/getQuiz", function(data) {
+    console.log("test");
     quizJSON = data;
     generateQuestion(quizJSON.quiz[0]);
-  });
+  }).fail(function(a,b,c) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+  })
+  console.log("test2");
 }
 
 function selectOption(value) {
   support.push(value);
   if(!(quizJSON.quiz.length-1==question)) {
+    console.log('1');
     question++;
     generateQuestion(quizJSON.quiz[question]);
   } else {
+    console.log('2');
     var arrStr = encodeURIComponent(JSON.stringify(support));
     $.getJSON("/submitQuiz?support="+arrStr, function(data) {
       document.getElementById('quizcontainer').innerHTML = "<h3>The recomended party for you is " + data.firstParty + "!</h3>";
@@ -27,6 +35,7 @@ function selectOption(value) {
 }
 
 function generateQuestion(genJSON) {
+  console.log("Generating" + genJSON);
   document.getElementById('quizcontainer').innerHTML = "<h2>Do you support: " + genJSON.law + "</h2>"
   + "<h3>" + genJSON.description + "</h3>" +
   "<button style=\"background-color:#008705;\" onClick=\"selectOption(2)\">Yes, Very</button>"+
