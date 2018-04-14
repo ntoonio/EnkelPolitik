@@ -1,11 +1,11 @@
 var insert = "";
-$.getJSON( "192.168.56.255:3000/list", function( datalist ) {
+$.getJSON( "/list", function( datalist ) {
   for(var i=0;i<10;i++) {
-    $.getJSON("192.168.56.255:3000/vote?vote="+datalist.voteringar[i].votering_id, function(data) {
+    $.getJSON("/vote?vote="+datalist.voteringar[i].votering_id, function(data) {
       var totalvotes=0;
       var title="Unknown law";
       var activevotes;
-      if (datalist.votering[i].hasOwnProperty('title')) {
+      if (datalist.voteringar[i].hasOwnProperty('title')) {
         totalvotes=datalist.title;
       }
       insert = insert.concat("<div class=\"subunit\"><h4>" + title + " </h4><div class=\"yesvote\">Yes<br />");
