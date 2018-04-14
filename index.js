@@ -113,43 +113,63 @@ function getVote(id, response) {
 app.get("/getQuiz", function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 	res.sendFile("quiz.json", {root: __dirname });
-})
+	/*res.send({
+		"quiz": [
+			{
+				"law": "Housing aid",
+				"description": "More than 6.9 billion sek from the state budget for 2018 goes to the area of ​​social planning, housing supply and construction and consumer policy. the Most money goes to investment support to organize rental housing and housing for students, 3.2 billion kronor. 1.3 billion sek goes to municipalities for increased housing construction and  1 billion sek goes to energy efficiency and renovation of multi-family houses and outdoor environments.",
+				"vote": {
+					"yes": {
+						"S": "102",
+						"M": "5",
+						"MP": "20",
+						"C": "5",
+						"V": "19",
+						"KD": "1"
+					},
+					"no": {
+						"SD": "41"
+					}
+				}
+			},
+				{
+				"law": "equality and the establishment of refugees ",
+				"description": "In the report, the Committee on Employment and Social Affairs deals with the Government's proposal in the 2016 budget bill in the field of equality and new immigrants' expatriation and alternative proposals for appropriations in the area of ​​expenditure from m,SD, C, L and KD. The budget bill for 2016 is based on an agreement between the government parties and V. Furthermore, it is proposed to abolish the system of launchers.",
+				"vote": {
+					"yes": {
+						"S": "104",
+						"M": "19",
+						"MP": "24",
+						"C": "9",
+						"V": "19",
+						"L": "2",
 
-app.get("/getQuizStats", function (req, res) {
-	var sum = 0
-	var sumOfYes = 0
-	var sumOfNo = 0
+					},
+					"no": {
+						"SD": "39"
+					}
+				}
+			},
+	      {
+				"law": "Workplace regulations and working hours",
+				"description": "",
+				"vote": {
+					"yes": {
+						"S": "104",
+						"M": "19",
+						"MP": "24",
+						"C": "9",
+						"V": "19",
+						"L": "2",
 
-	for (var j = 0; j <= members.length - 1; j++) {
-		sum += members[j]
-	}
-
-	for (var k= 0; k <= memberVotes.length - 1; k++) {
-		for (var l = 0; l <= memberVotes.length - 1; l++) {
-			if (memberVotes[k][l] == 1) {
-				sumOfYes++
-			}
-			else if (memberVotes[k][l] == 0) {
-				SumOfNo++
-			}
-		}
-	}
-
-	for (var i = 1; i <= parties.length - 1; i++) {
-		const p = members[i] / (sum - sumOfNo)
-		parties[i] = opinion * p * importance
-	}
-	
-	var opinion = parseFloat(req.query.opinion)
-	var importance = parseFloat(req.query.importance)
-	
-	// TODO: Hitta data för dessa variabler
-	// Jag vet inte hur det här fungerar så någon anna får fixa
-	var parties = []
-	var memebers = []
-	var memberVotes = []
-
-	res.send(JSON.stringify(parties))
+					},
+					"no": {
+						"SD": "39"
+					}
+				}
+			},
+		]
+	});*/
 })
 
 app.get("/vote", function (req, res) {
@@ -157,6 +177,18 @@ app.get("/vote", function (req, res) {
 		res.send(data)
 	})
 })
+
+app.get("/submitQuiz", function(req,res) {
+	var support = decodeURIComponent(req.query.support);
+	var contents = fs.readFileSync("quiz.json");
+	var jsonContent = JSON.parse(contents);
+	var partin = { "SD":"0","M":"0","KD":"0","MP":"0","L":"0","V":"0","C":"0","S":"0"};
+	for(var i=0;i<Object.keys(support).length;i++) {
+		jsonContent.quiz[i].vote.yes.forEach(function (item) {
+  		partin[item]+=1*support[i];
+		})
+	}
+});
 
 app.listen(3000, function() {
 	console.log("Running!")
