@@ -125,27 +125,35 @@ app.get("/vote", function (req, res) {
 })
 
 app.get("/submitQuiz", function(req,res) {
-	var support = decodeURIComponent(req.query.support);
-	var contents = fs.readFileSync("quiz.json");
-	var jsonContent = JSON.parse(contents);
-	var partin = { "SD":0,"M":0,"KD":0,"MP":0,"L":0,"V":0,"C":0,"S":0};
-	for(var i=0;i<3;i++) {
-		jsonContent.quiz[i].vote.yes.forEach(function (item) {
-  		partin[item]+=support[i];
-		});
-		jsonContent.quiz[i].vote.no.forEach(function (item) {
-			partin[item]-=support[i];
-		});
-	}
-	var partival="SD";
-	for (var parti in partin) {
-		if(partin[partival]<partin[parti]) {
-				partival=parti;
-		}
-	}
-	console.log(partin);
-	res.send({ "firstParty":parti } );
+    var support = decodeURIComponent(req.query.support);
+    var contents = fs.readFileSync("quiz.json");
+    var jsonContent = JSON.parse(contents);
+    //var partin = { "SD":"0","M":"0","KD":"0","MP":"0","L":"0","V":"0","C":"0","S":"0"};
+    var YourVote = req.query.vote === "Y";
+    
+    // req.query.vote = You Vote
+    var calcAns = { };
+    console.log("Support: " + support);
+    for(var i = 0; i < jsonContent.quiz.length; i++) {
+        console.log(i);
+        // calcPoints()
+        
+        // YourVote * ((politiker ? 1:0) - 0.5f) * (viktigt ? 1.0f:0.5f);
+        jsonContent.quiz[i].vote.yes.forEach(function (item) {
+            calcAns[item] += calcPoints(YourVote, true, false); // TODO: CHANGE THIRD ARGUMENT TO A VARIABLE 
+        });
+        jsonContent.quiz[i].vote.no.forEach(function (item) {
+            calcAns[item] += calcPoints(YourVote, false, false); // TODO: CHANGE THIRD ARGUMENT TO A VARIABLE 
+        });
+        
+    }
+    console.log(JSON.stringify(calcAns));
 });
+
+function calcPoints(vote, pol, imp) {
+    return (vote ? 1:-1) * ((pol ? 1:0) - 0.5) * (imp ? 1.0:0.5);
+}
+
 
 app.listen(3000, function() {
 	console.log("Running!")
