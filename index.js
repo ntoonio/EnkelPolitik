@@ -19,6 +19,8 @@ var calc = function QuizCalculator(){
 };
  */
 
+$.getScript('/Scripts/Hello.js', function () {          
+      HelloWorld();  
 
 
  
@@ -160,7 +162,7 @@ app.get("/submitQuiz", function(req,res) {
 
 app.listen(3000, function() {
 	console.log("Running!")
-})
+})});  
 
 //Lib
 function each( obj, callback ) {
