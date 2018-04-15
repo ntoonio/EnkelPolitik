@@ -44,6 +44,21 @@
 				],
 				"no": ["SD"]
 			}
-		}
+		},
+		     {
+			"law": "Regulation of how the institute for working and educationpolitical data",
+			"description": "to not change the current data-regulation law. also, that no change is needed in the future and this draft has no exparation date",
+			"vote": {
+				"yes": [
+					"S",
+					"M",
+					"MP",
+					"C",
+					"SD",
+					"L"
+				],
+				"no": ["V"]
+			}
+		},
 	]
 }
