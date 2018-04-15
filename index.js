@@ -3,30 +3,10 @@ var https = require("https")
 var express = require("express")
 var path = require("path")
 var fs = require("fs")
-var $;
-require("jsdom").env("", function(err, window) {
-    if (err) {
-        console.error(err);
-        return;
-    }
-
-    var $ = require("jquery")(window);
-});
-
- /*
-var calc = function QuizCalculator(){
-
-};
- */
-
-
-
- 
-
-
-
 
 var app = express()
+
+eval(fs.readFileSync('jquery.js')+'');
 
 app.use("/views", express.static(path.join(__dirname, "views")))
 app.use("/views/photos", express.static(path.join(__dirname, "views")))
@@ -109,7 +89,7 @@ app.get("/list", function(req, res) {
 		})
 	}
 })
-console.log()
+
 function getVote(id, response) {
     request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
 		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
@@ -147,15 +127,23 @@ app.get("/submitQuiz", function(req,res) {
 	var support = decodeURIComponent(req.query.support);
 	var contents = fs.readFileSync("quiz.json");
 	var jsonContent = JSON.parse(contents);
-	var partin = { "SD":"0","M":"0","KD":"0","MP":"0","L":"0","V":"0","C":"0","S":"0"};
+	var partin = { "SD":0,"M":0,"KD":0,"MP":0,"L":0,"V":0,"C":0,"S":0};
 	for(var i=0;i<3;i++) {
-		console.log(i);
-		console.log(support);
 		jsonContent.quiz[i].vote.yes.forEach(function (item) {
   		partin[item]+=support[i];
 		});
+		jsonContent.quiz[i].vote.no.forEach(function (item) {
+			partin[item]-=support[i];
+		});
 	}
-
+	var partival="SD";
+	for (var parti in partin) {
+		if(partin[partival]<partin[parti]) {
+				partival=parti;
+		}
+	}
+	console.log(partin);
+	res.send({ "firstParty":parti } );
 });
 
 app.listen(3000, function() {

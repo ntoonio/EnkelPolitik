@@ -38,19 +38,19 @@ function selectOption(value) {
     console.log('2');
     var arrStr = encodeURIComponent(JSON.stringify(support));
     $.getJSON("/submitQuiz?support="+arrStr, function(data) {
-      document.getElementById('quizcontainer').innerHTML = "<h3>The recomended party for you is " + data.firstParty + "!</h3>";
+      document.getElementById('quizcontainer').innerHTML = "<br /><br /><br /><br /><h3>The recomended party for you is " + data.firstParty + "!</h3>";
     });
   }
 }
 
 function generateQuestion(genJSON) {
   console.log("Generating" + JSON.stringify(genJSON));
-  document.getElementById('quizcontainer').innerHTML = "<h2>Do you support: " + genJSON["law"] + "</h2>"
-  + "<h3>" + genJSON.description + "</h3>" +
-  "<button style=\"background-color:#008705;\" onClick=\"selectOption(2)\">Yes, Very</button><br />"+
-  "<button style=\"background-color:#00d128;\" onClick=\"selectOption(1)\">Yes</button><br />"+
-  "<button style=\"background-color:#adadad;\" onClick=\"selectOption(0)\">I dont care</button><br />"+
-  "<button style=\"background-color:#ff0000;\" onClick=\"selectOption(-1)\">No</button><br />"+
-  "<button style=\"background-color:#9c0000;\" onClick=\"selectOption(-2)\">No, Very</button><br />";
+  document.getElementById('quizcontainer').innerHTML = "<br /><br /><h3>Do you support: " + genJSON["law"] + "</h3>"
+  + "<h4>" + genJSON.description + "</h4><br />" +
+  "<button class=\"optionbutton\" style=\"background-color:#008705;\" onClick=\"selectOption(2)\">Yes, Very</button><br /><br />"+
+  "<button class=\"optionbutton\" style=\"background-color:#00d128;\" onClick=\"selectOption(1)\">Yes</button><br /><br />"+
+  "<button class=\"optionbutton\" style=\"background-color:#adadad;\" onClick=\"selectOption(0)\">I dont care</button><br /><br />"+
+  "<button class=\"optionbutton\" style=\"background-color:#ff0000;\" onClick=\"selectOption(-1)\">No</button><br /><br />"+
+  "<button class=\"optionbutton\" style=\"background-color:#9c0000;\" onClick=\"selectOption(-2)\">No, Very</button><br /><br />";
   question++;
 }
