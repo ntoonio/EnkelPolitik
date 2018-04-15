@@ -4,27 +4,22 @@
   "description": "Vi vill med en enkel lösning visa hur politikerna röstar i riksdagen.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ntoonio/EnkelPolitik.git"
+	"type": "git",
+	"url": "git+https://github.com/ntoonio/EnkelPolitik.git"
   },
   "author": "Team 2Victor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ntoonio/EnkelPolitik/issues"
+	"url": "https://github.com/ntoonio/EnkelPolitik/issues"
   },
   "homepage": "https://github.com/ntoonio/EnkelPolitik#readme",
   "dependencies": {
-    "express": "^4.16.3",
-<<<<<<< Updated upstream
-    "jquery": "^3.3.1"
-=======
-    "jQuery": "^1.7.4",
-    "jquery": "^3.3.1",
-    "jsdom": "^11.7.0",
-    "nodeQuery": "0.0.9-1"
->>>>>>> Stashed changes
+	"express": "^4.16.3",
+	"jquery": "^3.3.1",
+	"jsdom": "^11.7.0",
+	"nodeQuery": "0.0.9-1"
   }
 }

@@ -1,127 +1,126 @@
 body {
-  padding: 0px;
-  margin: 0px;
-  font-family: 'Roboto', sans-serif;
+	padding: 0px;
+	margin: 0px;
+	font-family: 'Roboto', sans-serif;
 }
 
 .title {
-  font-family: 'Do Hyeon', sans-serif;
+	font-family: 'Do Hyeon', sans-serif;
 }
 
 div {
-  padding: 0px;
-  margin: 0px;
+	padding: 0px;
+	margin: 0px;
 }
 
 h1 {
-  font-size: 6vw;
-  margin:0px;
-  padding:0px;
+	font-size: 6vw;
+	margin:0px;
+	padding:0px;
 }
 
 h2 {
-  font-size: 4vw;
-  margin:0px;
-  padding:0px;
+	font-size: 4vw;
+	margin:0px;
+	padding:0px;
 }
 
 .inlinespan {
-  background-color: yellow;
+	background-color: yellow;
 }
 
 h3 {
-  font-size: 2vw;
-  margin:0px;
-  padding:0px;
+	font-size: 2vw;
+	margin:0px;
+	padding:0px;
 }
 
 h4 {
-  font-size: 1.5vw;
-  margin:0px;
-  padding:0px;
+	font-size: 1.5vw;
+	margin:0px;
+	padding:0px;
 }
 
 img {
-  vertical-align:middle;
-  padding: 0px;
-  margin: 0px;
+	vertical-align:middle;
+	padding: 0px;
+	margin: 0px;
 }
 
 .logo {
-  width:10vw;
-  height:10vw;
+	width:10vw;
+	height:10vw;
 }
 
 #inforiksdag {
-    background-image: url("photos/riksdag.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: center top;
-    background-attachment: fixed;
-    position: relative;
-    z-index: 1;
-    height:500px;
+	background-image: url("photos/riksdag.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: center top;
+	background-attachment: fixed;
+	position: relative;
+	z-index: 1;
+	height:500px;
 }
 
 #inforiksdaginne {
-    background-image: url("photos/riksdaginne.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: center top;
-    background-attachment: fixed;
-    position: relative;
-    z-index: 1;
-    height:250px;
+	background-image: url("photos/riksdaginne.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: center top;
+	background-attachment: fixed;
+	position: relative;
+	z-index: 1;
+	height:250px;
 }
 
 .subunit {
-  background-color: #e3e3e3;
-  border-style: solid;
-  border-bottom: 1px;
+	background-color: #e3e3e3;
+	border-style: solid;
+	border-bottom: 1px;
 }
 
 .yesvote {
-  overflow: hidden;
-  background-color: #cccccc;
-  float:right;
+	overflow: hidden;
+	background-color: #cccccc;
+	float:right;
 }
 
 .novote {
-  overflow: hidden;
-  background-color: #808080;
-  float:right;
+	overflow: hidden;
+	background-color: #808080;
+	float:right;
 }
 
 .neutralvote {
-  overflow: hidden;
-  background-color: #a6a6a6;
-  float:right;
+	overflow: hidden;
+	background-color: #a6a6a6;
+	float:right;
 }
 
 .partycell {
-  float:right;
+	float:right;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 .politibutton {
-  background-color: #ece300;
-  font-size: 2vw;
+	background-color: #ece300;
+	font-size: 2vw;
 }
 
 .optionbutton {
-  font-size: 1.5vw;
-  border-color: black;
-  width:40vw;
+	font-size: 1.5vw;
+	border-color: black;
+	width:40vw;
 }
 
 #quizcontainer {
-  background-color: #e644ff;
-  /*color: white;*/
-  height:70%;
-  padding-left: 10vw;
-  padding-right: 10vw;
+	background-color: #e644ff;
+	height:70%;
+	padding-left: 10vw;
+	padding-right: 10vw;
 }

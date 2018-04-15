@@ -90,7 +90,7 @@ app.get("/list", function(req, res) {
 })
 
 function getVote(id, response) {
-    request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
+	request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
 		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
 			var responseData = {"dokument": data2.votering.dokument, "bilaga": data2.votering.dokbilaga}
 
