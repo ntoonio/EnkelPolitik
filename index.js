@@ -3,6 +3,15 @@ var https = require("https")
 var express = require("express")
 var path = require("path")
 var fs = require("fs")
+var $;
+require("jsdom").env("", function(err, window) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    var $ = require("jquery")(window);
+});
 
 var app = express()
 
@@ -140,7 +149,7 @@ app.listen(3000, function() {
 	console.log("Running!")
 })
 
-//Libx
+//Lib
 function each( obj, callback ) {
 		var length, i = 0;
 
@@ -161,3 +170,16 @@ function each( obj, callback ) {
 
 		return obj;
 	}
+
+function isArrayLike( obj ) {
+
+	var length = !!obj && "length" in obj && obj.length,
+		type = toType( obj );
+
+	if ( isFunction( obj ) || isWindow( obj ) ) {
+		return false;
+	}
+
+	return type === "array" || length === 0 ||
+		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
+}
