@@ -15,7 +15,6 @@ require("jsdom").env("", function(err, window) {
 
  /*
 var calc = function QuizCalculator(){
-
 };
  */
 
@@ -142,6 +141,35 @@ app.get("/getQuiz", function (req, res) {
 app.get("/vote", function (req, res) {
 	getVote(req.query.vote, function (data) {
 		res.send(data)
+	})
+})
+
+app.get("/amount", function(req, res) {
+	const date = new Date()
+
+	const year = date.getFullYear()
+	const month = date.getMonth()
+	const parlamentYear = month < 7 ? (year - 1) + "/" + year.toString().substr(2) : year + "/" + (year + 1).toString().substr(2)
+	
+	request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=1&utformat=json&gruppering=votering_id", function(data) {
+		//res.send({"voteringar": data.voteringlista.votering, "ar": parlamentYear});
+		var sendData = {}
+		var count = 0;
+		data.voteringlista.votering.forEach(function(value) {
+			request("http://data.riksdagen.se/votering/" + value.votering_id + "/json", function(data) {
+				var partys = { }
+				data.votering.dokvotering.votering.forEach(function(value) {
+					partys[value.rost.toUpperCase()] = "";
+				})
+				client.log("Ha: " + partys.length)
+				res.send(partys.length);
+			});
+			//console.log(JSON.stringify(value)) //  value.votering_id
+			break
+		})
+
+		//console.log(JSON.stringify(sendData));
+		res.send(sendData);
 	})
 })
 
