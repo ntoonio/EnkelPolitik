@@ -4,6 +4,19 @@ var express = require("express")
 var path = require("path")
 var fs = require("fs")
 
+ /*
+var calc = function QuizCalculator(){
+
+};
+ */
+
+
+
+ 
+
+
+
+
 var app = express()
 
 app.use("/views", express.static(path.join(__dirname, "views")))
@@ -87,7 +100,7 @@ app.get("/list", function(req, res) {
 		})
 	}
 })
-
+console.log()
 function getVote(id, response) {
     request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
 		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
