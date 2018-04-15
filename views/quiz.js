@@ -32,6 +32,7 @@ function selectOption(value) {
       console.log(b);
       console.log(c);
     })
+
   //  generateQuestion(quizJSON.quiz[question]);
   } else {
     console.log('2');

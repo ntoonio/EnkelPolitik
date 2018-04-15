@@ -126,13 +126,38 @@ app.get("/submitQuiz", function(req,res) {
 	var contents = fs.readFileSync("quiz.json");
 	var jsonContent = JSON.parse(contents);
 	var partin = { "SD":"0","M":"0","KD":"0","MP":"0","L":"0","V":"0","C":"0","S":"0"};
-	for(var i=0;i<Object.keys(support).length;i++) {
+	for(var i=0;i<3;i++) {
+		console.log(i);
+		console.log(support);
 		jsonContent.quiz[i].vote.yes.forEach(function (item) {
-  		partin[item]+=1*support[i];
-		})
+  		partin[item]+=support[i];
+		});
 	}
+
 });
 
 app.listen(3000, function() {
 	console.log("Running!")
 })
+
+//Libx
+function each( obj, callback ) {
+		var length, i = 0;
+
+		if ( isArrayLike( obj ) ) {
+			length = obj.length;
+			for ( ; i < length; i++ ) {
+				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+					break;
+				}
+			}
+		} else {
+			for ( i in obj ) {
+				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+					break;
+				}
+			}
+		}
+
+		return obj;
+	}
