@@ -1,23 +1,21 @@
-var insert = "";
 $.getJSON( "/list", function( datalist ) {
-  for(var i=0;i<10;i++) {
-    const data = datalist.voteringar[i]
+  for(var i = 0; i < datalist.voteringar.length; i++) {
+    const data = datalist.voteringar[i];
+    const dir_list = document.createElement("dir");
+    dir_list.className = "subunit";
+    document.getElementById("votes").appendChild(dir_list);
+    var insert = "";
     var totalvotes=0;
     var title="Unknown law";
     var expanded="";
     var activevotes;
-    var date="";
-    
     if (data.dokument.hasOwnProperty('titel')) {
       title=data.dokument.titel;
     }
     if (data.dokument.hasOwnProperty('typrubrik')) {
       expanded=data.dokument.typrubrik;
     }
-    if (data.dokument.hasOwnProperty('datum')) {
-      date=data.dokument.datum;
-    }
-    insert = insert.concat("<div class=\"subunit\"><a href=\"" + data.dokument.dokument_url_html +"\"><h4>" + title + " </h4></a>" + expanded + "<br />" + date.split(" ")[0] + "<div class=\"yesvote\">Yes<br />");
+    insert = insert.concat("<a href=\"" + data.dokument.dokument_url_html +"\"><h4>" + title + " </h4></a>" + expanded + "<div class=\"yesvote\">Yes<br />");
     $.each(data.parti_roster.j, function(key,value) {
       totalvotes+=value;
       activevotes+=value/10;
@@ -40,8 +38,8 @@ $.getJSON( "/list", function( datalist ) {
     activevotes=(349-activevotes)/10;
     insert = insert.concat("<div class=\"neutralvote\" style=\"width:"+ activevotes + "vw;\">Novote<br />");
     insert=insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor("-") + ";width:" + (data.parti_roster.total_f+data.parti_roster.total_a)/10 + "vw;height:1vw\">" + "-" + "</div>");
-    insert = insert.concat("</div><br/><br><br></div>");
-    document.getElementById("votes").innerHTML = insert;
+    insert = insert.concat("</div><br/><br><br>");
+    dir_list.innerHTML = insert;
   }
 });
 
