@@ -127,7 +127,7 @@ app.get("/submitQuiz", function(req,res) {
 	var support = decodeURIComponent(req.query.support);
 	var contents = fs.readFileSync("quiz.json");
 	var jsonContent = JSON.parse(contents);
-	var partin = { "SD":0,"M":0,"KD":0,"MP":0,"L":0,"V":0,"S":0,"C":0};
+	var partin = { "SD":0,"M":0,"KD":0,"MP":0,"L":0,"V":0,"S":0,"SD":0};
 	for(var i=0;i<3;i++) {
 		jsonContent.quiz[i].vote.yes.forEach(function (item) {
   		partin[item]+=support[i];
