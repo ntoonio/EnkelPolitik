@@ -3,34 +3,10 @@ var https = require("https")
 var express = require("express")
 var path = require("path")
 var fs = require("fs")
-var file
+var QuizCalculator = require("./QuizCalculator.js")
+
 var app = express()
-var Algorithm = require("QuizCalculator_2.0.js")
-eval(fs.readFileSync('jquery.js')+'');
-/// 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///
 app.use("/views", express.static(path.join(__dirname, "views")))
 app.use("/views/photos", express.static(path.join(__dirname, "views")))
 
@@ -159,7 +135,13 @@ app.get("/submitQuiz", function(req,res) {
 			partin[item]-=support[i];
 		});
 	}
-
+	var partival="SD";
+	for (var parti in partin) {
+		if(partin[partival]<partin[parti]) {
+				partival=parti;
+		}
+	}
+	
 	res.send({ "firstParty":parti } );
 });
 

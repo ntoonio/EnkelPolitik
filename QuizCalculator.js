@@ -1,36 +1,11 @@
-function calc(parties, members, memberVotes) {
-	var opinion = parseFloat(prompt("what is your opinion on this draft"))
-	var importance = parseFloat(prompt("how impotant do you consider this draft to be"))
+function calculate(party ,pVotes, uVotes, qImp, pYes, pNo) {
+	var result = 0
+	var parties = [];
 
-	var sum = 0
-	var sumOfYes = 0
-	var sumOfNo = 0
-
-	for (var j = 0; j <= members.length - 1; j++) {
-		sum += members[j]
+	if (pVotes * uVotes > 0) {
+		parties.push(party + " " + pVotes * uVotes * qImp + (pYes - pNo)) 
 	}
-
-	for (var k= 0; k <= memberVotes.length - 1; k++) {
-		for (var l = 0; l <= memberVotes.length - 1; l++) {
-			if (memberVotes[k][l] == 1) {
-				sumOfYes++
-			}
-			else if (memberVotes[k][l] == 0) {
-				SumOfNo++
-			}
-		}
+	if (pVotes * uVotes < 0) {
+		parties.push(party + " " + pVotes * uVotes * qImp - (pYes - pNo)) 
 	}
-
-	for (var i = 1; i <= parties.length - 1; i++) {
-		const p = members[i] / (sum - sumOfNo)
-		parties[i] = opinion * p * importance
-	}
-
-	return parties
 }
-
-var parties = []
-var memebers = []
-var memberVotes = []
-
-console.log(calc(parties, members, memberVotes))
