@@ -89,7 +89,7 @@ app.get("/list", function(req, res) {
 })
 
 function getVote(id, response) {
-	request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
+    request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
 		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
 			var responseData = {"dokument": data2.votering.dokument, "bilaga": data2.votering.dokbilaga}
 
@@ -111,7 +111,7 @@ function getVote(id, response) {
 }
 
 app.get("/getQuiz", function (req, res) {
-	res.setHeader('Content-Type', 'application/json');
+	res.setHeader("Content-Type", "application/json");
 	res.sendFile("quiz.json", {root: __dirname });
 })
 
@@ -134,13 +134,7 @@ app.get("/submitQuiz", function(req,res) {
 			partin[item]-=support[i];
 		});
 	}
-	var partival="SD";
-	for (var parti in partin) {
-		if(partin[partival]<partin[parti]) {
-				partival=parti;
-		}
-	}
-	
+
 	res.send({ "firstParty":parti } );
 });
 
