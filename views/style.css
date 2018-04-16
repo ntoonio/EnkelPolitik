@@ -4,7 +4,7 @@ body {
 	padding: 0px;
 	margin: 0px;
 	font-family: "Roboto", sans-serif;
-	background-color: #f6f1f1;
+	background-color: #d9f3f4;
 }
 
 .header {
@@ -25,6 +25,7 @@ h2 {
 	padding: 0px;
 	display: inline-block;
 	font-weight: 400;
+	color: white;
 }
 
 h3 {
@@ -87,7 +88,7 @@ img {
 	background-attachment: fixed;
 	position: relative;
 	z-index: 1;
-	height: 500px;
+	height: 70vh;
 }
 
 #inforiksdaginne {
@@ -98,7 +99,7 @@ img {
 	background-attachment: fixed;
 	position: relative;
 	z-index: 1;
-	height: 250px;
+	height: 70vh;
 }
 
 .subunit {
@@ -130,12 +131,11 @@ img {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
 }
 
 .choiceButton {
-	background-color: #f6f1f1;
+	background-color: #d9f3f4;
 	color: #353253;
 	font-size: 2vw;
 	border: none;
@@ -154,4 +154,9 @@ a {
   height:70%;
   padding-left: 10vw;
   padding-right: 10vw;
+}
+
+.footer .logo {
+	height: 5vw;
+	width: 5vw;
 }
