@@ -7,10 +7,10 @@ $.getJSON("/list", function(datalist) {
 		voteDiv.classList.add("voteDiv")
 		voteDiv.innerHTML += `
 		<div class="voteInformation">
-			<a href=` + data.bilaga.fil_url + `><h3>` + data.dokument.titel + `</h3></a>
+			<a href="` + data.bilaga.fil_url + `" target="_blank"><h3>` + data.dokument.titel + `</h3></a>
 			<p class="subTitle">` + data.dokument.typrubrik + `</p>
 		</div>`;
-
+		
 		// Table
 		const table = document.createElement("table")
 		voteDiv.appendChild(table)

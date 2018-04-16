@@ -92,7 +92,7 @@ app.get("/list", function(req, res) {
 
 function getVote(id, response) {
 	request("http://data.riksdagen.se/votering/" + id + "/json", function (data) {
-		var responseData = {"dokument": data.votering.dokument, "bilaga": data.votering.dokbilaga}
+		var responseData = {"dokument": data.votering.dokument, "bilaga": data.votering.dokbilaga.bilaga}
 
 		var partyVotes = {"j": {}, "n": {}, "a": {}, "f": {}}
 		
