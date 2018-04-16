@@ -11,7 +11,7 @@ eval(fs.readFileSync('jquery.js')+'');
 
 
 
-
+calc(1,2,3,4,5)   //party,P_VOTES, U_VOTES, Q_IMP ,P_YES,P_NO
 
 
 
