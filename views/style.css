@@ -69,9 +69,7 @@ p.foregroundText {
 }
 
 img {
-  vertical-align:middle;
-  padding: 0px;
-  margin: 0px;
+  vertical-align: middle;
 }
 
 .logo {
@@ -80,8 +78,8 @@ img {
 	margin: 1vw 1vw 1vw 1vw;
 }
 
-#inforiksdag {
-	background-image: url("photos/riksdag.jpg");
+.parlamentOutsideBackground {
+	background-image: url("photos/parlament.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 	background-position: center top;
@@ -91,8 +89,8 @@ img {
 	height: 70vh;
 }
 
-#inforiksdaginne {
-	background-image: url("photos/riksdaginne.jpg");
+.parlamentInsideBackground {
+	background-image: url("photos/parlamentInside.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 	background-position: center top;
@@ -102,32 +100,61 @@ img {
 	height: 70vh;
 }
 
-.subunit {
-  background-color: #e3e3e3;
-  border-style: solid;
-  border-bottom: 1px;
+.voteDiv {
+	margin-left: 1vw;
+	margin-bottom: 2vh;
 }
 
-.yesvote {
-  overflow: hidden;
-  background-color: #cccccc;
-  float:right;
+.voteInformation {
+	width: 37vw;
+	display: inline-block;
+	vertical-align: top;
 }
 
-.novote {
-  overflow: hidden;
-  background-color: #808080;
-  float:right;
+.votesTable {
+	margin-top: 1vh;
+	border-collapse: collapse;
+	border-color: black;
+	border-style: solid;
+	border-width: 0.1vw;
+	display: inline-table;
 }
 
-.neutralvote {
-  overflow: hidden;
-  background-color: #a6a6a6;
-  float:right;
+.votesTable th {
+	padding: 1vh;
+	font-size: 3vh;
 }
 
-.partycell {
-  float:right;
+.votesTable td {
+	width: 15vw;
+}
+
+.votesTable * {
+	border-color: black;
+	border-style: solid;
+	border-width: 0.1vw;
+}
+
+.votesContainer {
+	vertical-align: top;
+}
+
+.votesContainer * {
+	display: inline-block;
+}
+
+.voteBox {
+	width: 0.8vw;
+	height: 0.8vw;
+
+	margin: 0.1vw;
+
+	border: none;
+}
+
+.votesTotalData {
+	text-align: center;
+	font-weight: 700;
 }
 
 a {

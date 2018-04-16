@@ -39,6 +39,8 @@ app.get("/quiz", function(req, res) {
 })
 
 app.get("/list", function(req, res) {
+	res.setHeader("Content-Type", "application/json");
+
 	const date = new Date()
 
 	const year = date.getFullYear()
@@ -48,7 +50,7 @@ app.get("/list", function(req, res) {
 	const cacheFileName = "cache_" + parlamentYear.replace("/", "") + ".json"
 
 	var usingCache = false
-
+	
 	if (fs.existsSync(cacheFileName)) {
 		const content = fs.readFileSync(cacheFileName)
 		const cahceTime = JSON.parse(content).timestamp
@@ -59,14 +61,14 @@ app.get("/list", function(req, res) {
 			res.send(content)
 		}
 	}
-
+	
 	if (!usingCache) {
 		var voteringar = []
 
 		request("http://data.riksdagen.se/voteringlista/?rm=" + parlamentYear.replace("/", "%2F") + "&bet=&punkt=&valkrets=&rost=&iid=&sz=10&utformat=json&gruppering=votering_id", function (data) {
-			for (v in data.voteringlista.votering){
+			for (v in data.voteringlista.votering) {
 				const voteringId = data.voteringlista.votering[v].votering_id
-
+				
 				getVote(voteringId, function (vote) {
 					voteringar.push(vote)
 
@@ -89,24 +91,22 @@ app.get("/list", function(req, res) {
 })
 
 function getVote(id, response) {
-    request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
-		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
-			var responseData = {"dokument": data2.votering.dokument, "bilaga": data2.votering.dokbilaga}
+	request("http://data.riksdagen.se/votering/" + id + "/json", function (data) {
+		var responseData = {"dokument": data.votering.dokument, "bilaga": data.votering.dokbilaga}
 
-			var partyVotes = {"j": {}, "n": {}, "a": {}, "f": {}}
+		var partyVotes = {"j": {}, "n": {}, "a": {}, "f": {}}
+		
+		for (d in data.votering.dokvotering.votering) {
+			const voteData = data.votering.dokvotering.votering[d]
 
-			for (d in data.voteringlista.votering) {
-				const voteData = data.voteringlista.votering[d]
+			const vote = voteData["rost"].toLowerCase().substr(0, 1)
+			partyVotes[vote][voteData["parti"]] == undefined ? partyVotes[vote][voteData["parti"]] = 1 : partyVotes[vote][voteData["parti"]] += 1
+			partyVotes["total_" + vote] == undefined ? partyVotes["total_" + vote] = 1 : partyVotes["total_" + vote] += 1
+		}
 
-				const vote = voteData["rost"].toLowerCase().substr(0, 1)
-				partyVotes[vote][voteData["parti"]] == undefined ? partyVotes[vote][voteData["parti"]] = 1 : partyVotes[vote][voteData["parti"]] += 1
-				partyVotes["total_" + vote] == undefined ? partyVotes["total_" + vote] = 1 : partyVotes["total_" + vote] += 1
-			}
+		responseData.parti_roster = partyVotes
 
-			responseData.parti_roster = partyVotes
-
-			response(responseData)
-		})
+		response(responseData)
 	})
 }
 
@@ -121,58 +121,24 @@ app.get("/vote", function (req, res) {
 	})
 })
 
-app.get("/submitQuiz", function(req,res) {
+app.get("/submitQuiz", function (req, res) {
 	var support = decodeURIComponent(req.query.support);
 	var contents = fs.readFileSync("quiz.json");
 	var jsonContent = JSON.parse(contents);
-	var partin = { "SD":0,"M":0,"KD":0,"MP":0,"L":0,"V":0,"S":0,"SD":0};
-	for(var i=0;i<3;i++) {
+	var partin = {"SD": 0, "M": 0, "KD": 0, "MP": 0, "L": 0, "V": 0, "S": 0, "C": 0};
+	for(var i = 0; i < 3; i++) {
 		jsonContent.quiz[i].vote.yes.forEach(function (item) {
-  		partin[item]+=support[i];
+  			partin[item] += support[i];
 		});
+		
 		jsonContent.quiz[i].vote.no.forEach(function (item) {
-			partin[item]-=support[i];
+			partin[item] -= support[i];
 		});
 	}
 
-	res.send({ "firstParty":parti } );
+	res.send({"firstParty": parti});
 });
 
 app.listen(3000, function() {
 	console.log("Running!")
 })
-
-//Lib
-function each( obj, callback ) {
-		var length, i = 0;
-
-		if ( isArrayLike( obj ) ) {
-			length = obj.length;
-			for ( ; i < length; i++ ) {
-				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-					break;
-				}
-			}
-		} else {
-			for ( i in obj ) {
-				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-					break;
-				}
-			}
-		}
-
-		return obj;
-	}
-
-function isArrayLike( obj ) {
-
-	var length = !!obj && "length" in obj && obj.length,
-		type = toType( obj );
-
-	if ( isFunction( obj ) || isWindow( obj ) ) {
-		return false;
-	}
-
-	return type === "array" || length === 0 ||
-		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
-}

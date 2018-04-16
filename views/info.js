@@ -1,47 +1,114 @@
 $.getJSON("/list", function(datalist) {
 	for (var i = 0; i < datalist.voteringar.length; i++) {
 		const data = datalist.voteringar[i];
-		const dir_list = document.createElement("dir");
-		dir_list.className = "subunit";
-		document.getElementById("votes").appendChild(dir_list);
-		var insert = "";
-		var totalvotes = 0;
-		var title = "Unknown law";
-		var expanded = "";
-		var activevotes;
-		if (data.dokument.hasOwnProperty('titel')) {
-			title = data.dokument.titel;
-		}
-		if (data.dokument.hasOwnProperty('typrubrik')) {
-			expanded = data.dokument.typrubrik;
-		}
-		insert = insert.concat("<a href=\"" + data.dokument.dokument_url_html + "\"><h4>" + title + " </h4></a>" + expanded + "<div class=\"yesvote\">Yes<br />");
-		$.each(data.parti_roster.j, function(key, value) {
-			totalvotes += value;
-			activevotes += value / 10;
-			insert = insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor(key) + ";width:" + value / 10 + "vw;height:1vw\">" + key + "</div>");
-		});
-		insert = insert.concat("</div>");
-		insert = insert.concat("<div class=\"novote\">No<br />");
-		$.each(data.parti_roster.n, function(key, value) {
-			totalvotes += value;
-			activevotes += value / 10;
-			insert = insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor(key) + ";width:" + value / 10 + "vw;height:1vw\">" + key + "</div>");
-		});
-		insert = insert.concat("</div>");
-		if (data.parti_roster.hasOwnProperty('total_f')) {
-			totalvotes += data.parti_roster.total_f;
-		}
-		if (data.parti_roster.hasOwnProperty('total_a')) {
-			totalvotes += data.parti_roster.total_a;
-		}
-		activevotes = (349 - activevotes) / 10;
-		insert = insert.concat("<div class=\"neutralvote\" style=\"width:" + activevotes + "vw;\">Novote<br />");
-		insert = insert.concat("<div class=\"partycell\" style=\"background-color:" + getColor("-") + ";width:" + (data.parti_roster.total_f + data.parti_roster.total_a) / 10 + "vw;height:1vw\">" + "-" + "</div>");
-		insert = insert.concat("</div><br/><br><br>");
-		dir_list.innerHTML = insert;
+		
+		const voteDiv = document.createElement("div")
+		document.getElementById("votes").appendChild(voteDiv)
+		voteDiv.classList.add("voteDiv")
+		voteDiv.innerHTML += `
+		<div class="voteInformation">
+			<a href=` + data.bilaga.fil_url + `><h3>` + data.dokument.titel + `</h3></a>
+			<p class="subTitle">` + data.dokument.typrubrik + `</p>
+		</div>`;
+
+		// Table
+		const table = document.createElement("table")
+		voteDiv.appendChild(table)
+		table.classList.add("votesTable")
+
+		const headerRow = document.createElement("tr")
+		table.appendChild(headerRow)
+
+		const yesHeader = document.createElement("th")
+		headerRow.appendChild(yesHeader)
+		yesHeader.innerText = "Yes"
+
+		const noHeader = document.createElement("th")
+		headerRow.appendChild(noHeader)
+		noHeader.innerText = "No"
+		
+		const abstainHeader = document.createElement("th")
+		headerRow.appendChild(abstainHeader)
+		abstainHeader.innerText = "Abstain"
+		
+		const absentHeader = document.createElement("th")
+		headerRow.appendChild(absentHeader)
+		absentHeader.innerText = "Absent"
+
+		const contentRow = document.createElement("tr")
+		table.appendChild(contentRow)
+
+		const yesVotesTd = document.createElement("td")
+		contentRow.appendChild(yesVotesTd)
+		yesVotesTd.classList.add("votesContainer")
+		
+		const noVotesTd = document.createElement("td")
+		contentRow.appendChild(noVotesTd)
+		noVotesTd.classList.add("votesContainer")
+
+		const abstainVotesTd = document.createElement("td")
+		contentRow.appendChild(abstainVotesTd)
+		abstainVotesTd.classList.add("votesContainer")
+		
+		const absentVotesTd = document.createElement("td")
+		contentRow.appendChild(absentVotesTd)
+		absentVotesTd.classList.add("votesContainer")
+
+		const totalRow = document.createElement("tr")
+		table.appendChild(totalRow)
+
+		const yesTotalTd = document.createElement("td")
+		totalRow.appendChild(yesTotalTd)
+		yesTotalTd.classList.add("votesTotalData")
+		
+		const noTotalTd = document.createElement("td")
+		totalRow.appendChild(noTotalTd)
+		noTotalTd.classList.add("votesTotalData")
+
+		const abstainTotalTd = document.createElement("td")
+		totalRow.appendChild(abstainTotalTd)
+		abstainTotalTd.classList.add("votesTotalData")
+		
+		const absentTotalTd = document.createElement("td")
+		totalRow.appendChild(absentTotalTd)
+		absentTotalTd.classList.add("votesTotalData")
+
+		setVotes("j", yesVotesTd, yesTotalTd, data)
+		setVotes("n", noVotesTd, noTotalTd, data)
+		setVotes("a", abstainVotesTd, abstainTotalTd, data)
+		setVotes("f", absentVotesTd, absentTotalTd, data)
 	}
 });
+
+function setVotes(vote, td, totalTd, data) {
+	var partyVotes = []
+
+	for (const party in data.parti_roster[vote]) {
+		partyVotes.push({"party": party, "votes": data.parti_roster[vote][party]})
+	}
+	
+	partyVotes = partyVotes.sort(function (a, b) {
+		if (a.votes > b.votes) return -1
+		if (a.votes < b.votes) return 1
+		return 0
+	})
+
+	for (const i in partyVotes) {
+		const party = partyVotes[i]
+		
+		for (var v = 0; v < data.parti_roster[vote][party.party]; v++) {
+			const box = document.createElement("div")
+			td.appendChild(box)
+			box.classList.add("voteBox")
+			box.style.backgroundColor = getColor(party.party)
+			totalTd.innerText = totalTd.innerText == "" ? 1 : parseInt(totalTd.innerText) + 1
+		}
+	}
+
+	if (totalTd.innerText == "") {
+		totalTd.innerText = 0
+	}
+}
 
 function getColor(party) {
 	if (party == "SD") {
