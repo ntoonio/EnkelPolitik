@@ -3,34 +3,9 @@ var https = require("https")
 var express = require("express")
 var path = require("path")
 var fs = require("fs")
-var file
+
 var app = express()
-var Algorithm = require('QuizCalculator_2.0.js')
-eval(fs.readFileSync('jquery.js')+'');
-/// 
 
-
-
-calc(1,2,3,4,5)   //party,P_VOTES, U_VOTES, Q_IMP ,P_YES,P_NO
-
-
-
-s
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-///
 app.use("/views", express.static(path.join(__dirname, "views")))
 app.use("/views/photos", express.static(path.join(__dirname, "views")))
 
@@ -114,7 +89,7 @@ app.get("/list", function(req, res) {
 })
 
 function getVote(id, response) {
-    request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
+	request("http://data.riksdagen.se/voteringlista/?bet=&punkt=&valkrets=&rost=&id=" + id + "&sz=500&utformat=json&gruppering=", function (data) {
 		request("http://data.riksdagen.se/votering/" + id + "/json", function (data2) {
 			var responseData = {"dokument": data2.votering.dokument, "bilaga": data2.votering.dokbilaga}
 
@@ -159,7 +134,13 @@ app.get("/submitQuiz", function(req,res) {
 			partin[item]-=support[i];
 		});
 	}
-
+	var partival="SD";
+	for (var parti in partin) {
+		if(partin[partival]<partin[parti]) {
+				partival=parti;
+		}
+	}
+	
 	res.send({ "firstParty":parti } );
 });
 

@@ -1,59 +1,41 @@
 <html>
-<head>
-  <title>Enkelpolitik</title>
-  <link rel="stylesheet" type="text/css" href="views/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-</head>
-<body>
-  <div width="100%" style="background-color:#ff8a6b;" class="title">
-    <center>
-    <h1>
-    <img src="views/photos/logo.png" class="logo" align="middle"/> Enkelpolitik
-    <br />
-  </h1>
-  <script>
-var RESPONSE=prompt("what is your opinion on this draft?")
-var IMP=prompt("how important do you consider this draft?")
-calculate(4,12, RESPONSE, IMP,3,9)
-
-function calculate(party,P_VOTES, U_VOTES, Q_IMP ,P_YES,P_NO) {
-	var result=0
-	var parties;
-	if(P_VOTES*U_VOTES>0) {
-    parties.push(party+" "+P_VOTES*U_VOTES*Q_IMP+(P_YES-P_NO)) 
-    console.log(party+" "+P_VOTES*U_VOTES*Q_IMP+(P_YES-P_NO))
-}
-	if(P_VOTES*U_VOTES<0) {
-    parties.push(party+" "+P_VOTES*U_VOTES*Q_IMP-(P_YES-P_NO)) 
-    console.log(party+" "+P_VOTES*U_VOTES*Q_IMP-(P_YES-P_NO))
-}
-		
-
-}
-console.log("ButtDick")
-  </script>
-    </center>
-  </div><div id="inforiksdag">
-    <center>
-    <h2><br /><span class="inlinespan">Democracy for real!</span></h2><br />
-    <h3><span class="inlinespan">We do not recomend a party based on what they promise but what they deliver.<br />
-      Vi ger dig olika lag förslag som har varit i riksdagen och baserat på votering recomenderar dig ett parti.<br />
-      Vi har dessutom mycket information om riksdagens nuvarande aktiviteter.</span></h3>
-    </center>
-  </div>
-  <div width="100%" style="background-color:#5bff7b;">
-  <center>
-  <h2 style="color:white;"><br />Välj ett alternativ</h2>
-  <h3> <a href="quiz"><button class="politibutton">Politiskt Test</button></a> <a href="info"><button class="politibutton">Riksdags info</button></a> <br /><br /></h3>
-  </center>
-</div>
-<div width="100%" style="background-color:#dbff00;" class="title">
-  <h4>
-  <img src="views/photos/logo.png" class="logo" align="middle" style="height:5vw;width:5vw;"/> Enkelpolitik
-  <br />
-  Made by Team2Viktor
-  </h4>
-</div>
-</body>
+	<head>
+		<title>Enkelpolitik</title>
+		<link rel="stylesheet" type="text/css" href="views/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	</head>
+	<body>
+		<div width="100%" style="background-color:#ff8a6b;" class="title">
+			<center>
+				<h1>
+					<img src="views/photos/logo.png" class="logo" align="middle"/> Enkelpolitik
+					<br />
+				</h1>
+			</center>
+		</div>
+		<div id="inforiksdag">
+			<center>
+				<h2><br /><span class="inlinespan">Democracy for real!</span></h2>
+				<br />
+				<h3><span class="inlinespan">We do not recomend a party based on what they promise but what they deliver.<br />
+					Vi ger dig olika lag förslag som har varit i riksdagen och baserat på votering recomenderar dig ett parti.<br />
+					Vi har dessutom mycket information om riksdagens nuvarande aktiviteter.</span>
+				</h3>
+			</center>
+		</div>
+		<div width="100%" style="background-color:#5bff7b;">
+			<center>
+				<h2 style="color:white;"><br />Välj ett alternativ</h2>
+				<h3> <a href="quiz"><button class="politibutton">Politiskt Test</button></a> <a href="info"><button class="politibutton">Riksdags info</button></a> <br /><br /></h3>
+			</center>
+		</div>
+		<div width="100%" style="background-color:#dbff00;" class="title">
+			<h4>
+				<img src="views/photos/logo.png" class="logo" align="middle" style="height:5vw;width:5vw;"/> Enkelpolitik
+				<br />
+				Made by team 2Victor
+			</h4>
+		</div>
+	</body>
 </html>
